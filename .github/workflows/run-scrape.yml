@@ -1,0 +1,24 @@
+name: Scrape Consum
+
+on:
+  schedule:
+    - cron: '10 7 * * *'
+
+jobs:
+  scrape:
+    name: Run scrape job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run scrape script 
+        run: bash ./scrape.sh
+      - name: Commit files
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add data/*
+          git commit -m "GH ACTION Add products $(date)" || echo "Nothing to commit"
+          git push origin master
+        env:
+          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+          username: github-actions
