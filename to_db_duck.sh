@@ -4,7 +4,7 @@ data_dir='data'
 db_dir='db'
 
 echo -n "Accessing last date in db: "
-startdate=$(duckdb -noheader -list db/products.duck 'select max(date) from products')
+startdate=$(duckdb -noheader -list db/consum.duck 'select max(date) from products')
 echo $startdate
 enddate=$(date +'%Y-%m-%d')
 
@@ -23,7 +23,7 @@ while [[ "$thedate" < "$enddate" || "$thedate" == "$enddate" ]]; do
     then
         jq -c '.[]' $data_dir/$file > ./temp.ndjson
         echo "Inserting $thedate"
-        duckdb $db_dir/products.duck < ./products_duck.sql 
+        duckdb $db_dir/consum.duck < ./products_duck.sql 
         rm ./temp.ndjson
         thedate=$( date --date="$thedate + 1 day" +'%Y-%m-%d' )
     else
