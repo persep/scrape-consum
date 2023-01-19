@@ -2,6 +2,8 @@ reduce [inputs] as $s ([input]; . + $s) |
 map(.products[] | 
 	{
 		id,
+		code,
+		ean,
 		name: "\(.productData.name) \(.productData.brand.name)",
 		description: .productData.description,
 		category: .categories[0].name,
