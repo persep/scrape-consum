@@ -13,7 +13,7 @@ echo "Creating temporary folder"
 mkdir $tmp_dir
 
 counter=0
-offset=`expr $counter \* 100`
+offset=$((counter * 100))
 
 while true
 do
@@ -25,8 +25,8 @@ do
 	if [ "$hasMore" = false ] ; then
 		break
 	fi
-	let "counter += 1"
-	offset=`expr $counter \* 100`
+	counter=$((counter+1))
+	offset=$((counter * 100))
 	sleep 2
 done
 
