@@ -20,6 +20,11 @@ do
 	echo "Downloading offset $offset"
 	url="https://tienda.consum.es/api/rest/V1.0/catalog/product?limit=100&offset=$offset"
 	resp=$(curl --fail --show-error --silent $url)
+	if (( $? != 0 )); then
+		echo "curl failed with error $?"
+		exit 1
+	fi
+
 	echo $resp > $tmp_dir/products-$offset.json
 	hasMore=$(echo $resp | jq '.hasMore')
 	if [ "$hasMore" = false ] ; then
