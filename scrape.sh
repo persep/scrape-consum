@@ -20,8 +20,9 @@ do
 	echo "Downloading offset $offset"
 	url="https://tienda.consum.es/api/rest/V1.0/catalog/product?limit=100&offset=$offset"
 	resp=$(curl --fail --show-error --silent $url)
-	if (( $? != 0 )); then
-		echo "curl failed with error $?"
+	exit_code=$?
+	if (( $exit_code != 0 )); then
+		echo "curl failed with error ${exit_code}"
 		exit 1
 	fi
 
