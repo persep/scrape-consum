@@ -16,4 +16,4 @@ select
   json ->> '$.code',
   json ->> '$.ean',
   json ->> '$.iva'
-from read_json_objects('temp.ndjson');
+from read_ndjson_objects('temp.ndjson');
