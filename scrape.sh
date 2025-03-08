@@ -17,7 +17,10 @@ offset=$((counter * 100))
 
 while true
 do
-	echo "Downloading offset $offset"
+	if (( $offset == 2900 )); then
+ 		continue
+   	fi
+ 	echo "Downloading offset $offset"
 	url="https://tienda.consum.es/api/rest/V1.0/catalog/product?limit=100&offset=$offset"
 	resp=$(curl --fail --show-error --silent --insecure $url)
 	exit_code=$?
@@ -33,10 +36,7 @@ do
 	fi
 	counter=$((counter+1))
 	offset=$((counter * 100))
-	if (( $offset == 2900 )); then
- 		continue
-   	fi
- 	sleep 2
+	sleep 2
 done
 
 today=$(date +'%Y-%m-%d')
