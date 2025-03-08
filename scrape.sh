@@ -33,7 +33,10 @@ do
 	fi
 	counter=$((counter+1))
 	offset=$((counter * 100))
-	sleep 2
+	if (( $offset == 2900 )); then
+ 		continue
+   	fi
+ 	sleep 2
 done
 
 today=$(date +'%Y-%m-%d')
