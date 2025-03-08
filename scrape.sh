@@ -18,7 +18,7 @@ offset=$((counter * 100))
 while true
 do
 	if (( $offset == 2900 )); then
- 		continue
+ 		echo "Inside loop"
    	fi
  	echo "Downloading offset $offset"
 	url="https://tienda.consum.es/api/rest/V1.0/catalog/product?limit=100&offset=$offset"
